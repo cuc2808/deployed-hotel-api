@@ -1,14 +1,15 @@
-# Start with Amazon Corretto 17 Alpine base image
-FROM amazoncorretto:17-alpine
 
-# Install curl on Alpine
-RUN apk update && apk add --no-cache curl
+# Start with Java 25 runtime
+FROM amazoncorretto:25-alpine
+
+# Install curl for the healthcheck
+RUN apk add --no-cache curl
 
 # Copy the jar file into the image
 COPY target/app.jar /app.jar
 
-# Expose the port your app runs on
+# Expose the application port
 EXPOSE 7070
 
-# Command to run your app
+# Run the application
 CMD ["java", "-jar", "/app.jar"]
